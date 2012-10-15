@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js"></script>
+    <script src="../js/main.js"></script>
+    <title>簡易twitter検索</title>
+</head>
+<body>
+<div class="container">
+    <h1>Search for Twitter</h1>
+    <div ng-controller="mainController">
+        <form ng-submit="executeSearch()" name="searchForm">
+            <input type="text" ng-model="query" required>
+            <input type="submit" value="Search" ng-disabled="searchForm.$invalid">
+        </form>
+        <h2>Result</h2>
+        <ul ng-show="results.length">
+            <li ng-repeat="result in results"></li>
+            <img ng-src="result.profile_image_url">
+            <a ng-href="http://twitter.com/{{result.from_user}}/status/{{result.id_str}}">{{result.text}}</a>
+            {{result.from_user}}
+        </ul>
+        <p ng-hide="results.length"></p>
+    </div>
+</div>
+</body>
+</html>
